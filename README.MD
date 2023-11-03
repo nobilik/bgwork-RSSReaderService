@@ -13,3 +13,6 @@
 3. app send response with parsed rss items to reciever.
 
    we will filter data by pub date on reciever side
+
+docker-compose build
+docker-compose ub
