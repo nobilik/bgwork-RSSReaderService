@@ -1,14 +1,17 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/joho/godotenv"
+	"github.com/nobilik/bgwork/RSSReaderService/handlers"
 )
 
 func init() {
-	if os.Getenv("PORT") != "" {
+	if os.Getenv("API_PORT") != "" {
 		return
 	}
 	err := godotenv.Load(".env")
@@ -18,5 +21,7 @@ func init() {
 }
 
 func main() {
-	server()
+	mux := handlers.SetupRoutes()
+	fmt.Printf("Server listening on port %s\n", os.Getenv("API_PORT"))
+	http.ListenAndServe(":"+os.Getenv("API_PORT"), mux)
 }

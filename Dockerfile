@@ -14,7 +14,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /rss_service
 
 
 FROM build as release
-ENV PORT="2345"
+ENV API_PORT="2345"
 WORKDIR /
 
 COPY --from=build /rss_service /rss_service
@@ -25,7 +25,7 @@ RUN groupadd -f -g 1000 rss && \
     chown -R rss:rss /data
 USER rss:rss
 
-EXPOSE ${PORT}
+EXPOSE ${API_PORT}
 
 ENTRYPOINT ["/rss_service"]
 
